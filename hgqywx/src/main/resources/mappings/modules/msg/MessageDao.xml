@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.msg.dao.MessageDao">
+    
+	<sql id="messageColumns">
+		a.id AS "id",
+		a.touser AS "touser",
+		a.toparty AS "toparty",
+		a.totag AS "totag",
+		a.msgtype AS "msgtype",
+		a.agentid AS "agentid",
+		a.content AS "content",
+		a.safe AS "safe",
+		a.media_id AS "mediaId",
+		a.title AS "title",
+		a.description AS "description",
+		a.url AS "url",
+		a.btntxt AS "btntxt",
+		a.article AS "article",
+		a.picurl AS "picurl",
+		a.thumb_media_id AS "thumbMediaId",
+		a.author AS "author",
+		a.content_source_url AS "contentSourceUrl",
+		a.digest AS "digest",
+		a.appid AS "appid",
+		a.pages AS "pages",
+		a.emphasis_first_item AS "emphasisFirstItem",
+		a.content_item AS "contentItem",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="messageJoins">
+	</sql>
+    
+	<select id="get" resultType="Message">
+		SELECT 
+			<include refid="messageColumns"/>
+		FROM t_msg a
+		<include refid="messageJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Message">
+		SELECT 
+			<include refid="messageColumns"/>
+		FROM t_msg a
+		<include refid="messageJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="title != null and title != ''">
+				AND a.title LIKE 
+					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{title},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Message">
+		SELECT 
+			<include refid="messageColumns"/>
+		FROM t_msg a
+		<include refid="messageJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_msg(
+			id,
+			touser,
+			toparty,
+			totag,
+			msgtype,
+			agentid,
+			content,
+			safe,
+			media_id,
+			title,
+			description,
+			url,
+			btntxt,
+			article,
+			picurl,
+			thumb_media_id,
+			author,
+			content_source_url,
+			digest,
+			appid,
+			pages,
+			emphasis_first_item,
+			content_item,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{touser},
+			#{toparty},
+			#{totag},
+			#{msgtype},
+			#{agentid},
+			#{content},
+			#{safe},
+			#{mediaId},
+			#{title},
+			#{description},
+			#{url},
+			#{btntxt},
+			#{article},
+			#{picurl},
+			#{thumbMediaId},
+			#{author},
+			#{contentSourceUrl},
+			#{digest},
+			#{appid},
+			#{pages},
+			#{emphasisFirstItem},
+			#{contentItem},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_msg SET 	
+			touser = #{touser},
+			toparty = #{toparty},
+			totag = #{totag},
+			msgtype = #{msgtype},
+			agentid = #{agentid},
+			content = #{content},
+			safe = #{safe},
+			media_id = #{mediaId},
+			title = #{title},
+			description = #{description},
+			url = #{url},
+			btntxt = #{btntxt},
+			article = #{article},
+			picurl = #{picurl},
+			thumb_media_id = #{thumbMediaId},
+			author = #{author},
+			content_source_url = #{contentSourceUrl},
+			digest = #{digest},
+			appid = #{appid},
+			pages = #{pages},
+			emphasis_first_item = #{emphasisFirstItem},
+			content_item = #{contentItem},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE t_msg SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

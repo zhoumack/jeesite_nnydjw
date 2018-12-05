@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.act.dao.ActHiTaskinstDao">
+    <!-- 个人申请统计 -->
+	<select id="personalApplyStatistics" resultType="com.thinkgem.jeesite.modules.act.vo.WorkloadStatistics"  >
+		SELECT
+			COUNT(ID_) count,
+			DATE_FORMAT(START_TIME_, '%Y-%m-%d') date
+		FROM
+			act_hi_taskinst
+		WHERE
+			ASSIGNEE_ = #{assignee}
+		AND TASK_DEF_KEY_ = 'audit'
+		<if test='startTime != null'>
+		 AND START_TIME_ <![CDATA[ >= ]]> #{startTime}
+		</if>
+		<if test='endTime != null'>
+		AND START_TIME_ <![CDATA[ < ]]> #{endTime}
+		</if>
+		GROUP BY
+			DATE_FORMAT(START_TIME_, '%Y-%m-%d')
+		ORDER BY date 
+	</select>
+	<!-- 个人工作量已统计 -->
+	<select id="personalWorkloadStatistics" resultType="com.thinkgem.jeesite.modules.act.vo.WorkloadStatistics"  >
+		SELECT
+			COUNT(ID_) count,
+			DATE_FORMAT(START_TIME_, '%Y-%m-%d') date
+		FROM
+			act_hi_taskinst
+		WHERE
+			ASSIGNEE_ = #{assignee}
+		AND TASK_DEF_KEY_ <![CDATA[ <> ]]> 'audit'
+		<if test='isDone == true'>
+      		  AND DELETE_REASON_ = 'completed'
+        </if>
+        <if test='isDone == false'>
+      		  AND DELETE_REASON_  is null
+        </if>
+		<if test='startTime != null'>
+			 AND START_TIME_ <![CDATA[ >= ]]> #{startTime}
+		</if>
+		<if test='endTime != null'>
+			 AND START_TIME_ <![CDATA[ <= ]]> #{endTime}
+		</if>
+		GROUP BY
+			DATE_FORMAT(START_TIME_, '%Y-%m-%d')
+		ORDER BY date 
+	</select>
+	<!-- 部门人员工作量统计 -->
+	<select id="departmentWorkloadStatistics" resultType="com.thinkgem.jeesite.modules.act.vo.DepartmentWorkloadStatistics"  >
+		SELECT 
+		 `status` AS `status`,
+		  CASE WHEN `status` = 0 THEN '未完成'
+	      WHEN `status` = 1 THEN '完成'
+	      WHEN `status` = 2 THEN '申请量' END AS statusName,
+		 COUNT(`status`) AS `count`
+			 FROM (
+			SELECT
+				  CASE 
+				  WHEN TASK_DEF_KEY_ <![CDATA[ <> ]]> 'audit' AND  DELETE_REASON_ IS NULL  THEN 0
+				  WHEN TASK_DEF_KEY_ <![CDATA[ <> ]]> 'audit' THEN 1   
+				  WHEN TASK_DEF_KEY_ = 'audit' THEN 2 END AS `status`
+			FROM
+				act_hi_taskinst
+				LEFT JOIN sys_user su ON su.`id` = act_hi_taskinst.`ASSIGNEE_`
+			WHERE
+				ASSIGNEE_ IN 
+			<if test="users == null or 0 == users.size() ">('')</if>
+	        <foreach collection="users" item="user" index=""
+	            open="(" close=")" separator=",">
+	            #{user}
+	        </foreach>
+			
+			AND START_TIME_ <![CDATA[ >= ]]> #{startTime}
+			AND START_TIME_ <![CDATA[ <= ]]> #{endTime}
+		) AS intable  GROUP BY `status`
+	</select>
+	<!-- 所有部门工作量统计(按部门分组) -->
+	<select id="departmentSumWorkloadStatistics" resultType="com.thinkgem.jeesite.modules.act.vo.DepartmentSumWorkloadStatistics"  >
+		SELECT
+			COUNT(ID_) count,
+		    so.`id` officeId,
+            so.`name` officeName 
+		FROM
+			act_hi_taskinst
+			LEFT JOIN sys_user su ON su.`id` = act_hi_taskinst.`ASSIGNEE_`
+			LEFT JOIN sys_office so ON so.`id` = su.`office_id`
+		WHERE
+			<if test='state == "0"'>
+					DELETE_REASON_  is null
+	      		  AND TASK_DEF_KEY_ <![CDATA[ <> ]]> 'audit'
+	      		  
+	        </if>
+	        <if test='state == "1"'>
+	        	  DELETE_REASON_ = 'completed'
+	      		  AND TASK_DEF_KEY_ <![CDATA[ <> ]]> 'audit'
+	        </if>
+	        <if test='state == "2"'>
+	      		  TASK_DEF_KEY_ <![CDATA[ = ]]> 'audit'
+	        </if>
+	    And ASSIGNEE_ is not null
+		AND START_TIME_ <![CDATA[ >= ]]> #{startTime}
+		AND START_TIME_ <![CDATA[ <= ]]> #{endTime}
+		GROUP BY so.`id`
+	</select>
+</mapper>

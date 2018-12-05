@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>组件</title>
+		<script type="text/javascript" src="js/public.js"></script>
+	</head>
+
+	<body>
+		<div class="pub_mod">
+			<div class="pub_row">
+				<span class="pub_input_title">文本框</span>
+				<div class="pub_input_con">
+					<input class="pub_input" type="text" placeholder="请输入文本" />
+				</div>
+			</div>
+		</div>
+
+		<div class="pub_mod">
+			<div class="pub_row">
+				<div class="pub_textarea_title">文本域</div>
+				<div class="pub_textarea_con">
+					<textarea class="pub_textarea" placeholder="请输入内容"></textarea>
+				</div>
+				<div class="pub_textarea_num">
+					<span class="pub_textarea_num1">0</span>&nbsp;/&nbsp;<span class="pub_textarea_num2">500</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="pub_mod">
+			<div class="pub_row">
+				<div class="pub_input_title">时间选择器</div>
+				<div class="pub_input_con">
+					<!--dataOptions='{"type":"date"}'-->
+					<input class="pub_input pub_sel_time" type="text" placeholder="请选择" readonly="readonly" dataOptions='' />
+				</div>
+			</div>
+			<div class="pub_row">
+				<div class="pub_input_title">自定义选择器(一级)</div>
+				<div class="pub_input_con">
+					<input class="pub_input pub_sel_zdy" type="text" placeholder="请选择" readonly="readonly" dataOptions='[{"id":"1","text":"选择1"},{"id":"2","text":"选择2"}]' />
+					<input type="hidden" />
+					<!--可用于存储选择的id提交-->
+				</div>
+			</div>
+			<div class="pub_row">
+				<div class="pub_input_title">自定义选择器(二级)</div>
+				<div class="pub_input_con">
+					<input class="pub_input pub_sel_zdy_two" type="text" placeholder="请选择" readonly="readonly" dataOptions='[{"id":"110000","text":"北京市","children":[{"id":"110101","text":"东城区"},{"id":"110102","text":"西城区"}]},{"id":"120000","text":"天津市","children":[{"id":"120101","text":"和平区"},{"id":"120102","text":"河东区"}]}]' />
+					<input type="hidden" />
+					<!--可用于存储选择的id提交-->
+				</div>
+			</div>
+		</div>
+
+		<div class="pub_mod">
+			<div class="pub_row">
+				<span class="pub_input_title pub_radio_title">单选框</span>
+				<div class="pub_input_con">
+					<div class="mui-row mui-col-xs-12">
+						<div class="mui-col-xs-6 mui-input-row mui-radio mui-left">
+							<label class="mui-text-left pub_radio_label">单选1</label>
+							<input class="pub_radio_input" name="radio" type="radio" value="单选1" checked>
+						</div>
+						<div class="mui-col-xs-6 mui-input-row mui-radio mui-left" style="clear: none;">
+							<label class="mui-text-left pub_radio_label">单选2</label>
+							<input class="pub_radio_input" name="radio" type="radio" value="单选2">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="pub_mod">
+			<div class="pub_row pub_uploader_row">
+				<div class="pub_uploader_title">上传图片视频</div>
+				<div class="pub_uploader_con">
+					<!--<div class="pub_uploader_div" fileId="">
+						<span class="mui-badge mui-btn-red uploader_del"></span>
+						<img class="pub_uploader_one" src="img/Email.png" data-preview-src="" data-preview-group="1">
+						<div class="pub_upload_progressbar_div">
+							<span class="upload_progressbar"></span>
+							<h5 class="progressbar_num"></h5>
+						</div>
+					</div>-->
+					<a id="pub_uploader_a" class="pub_uploader_a"></a>
+					<input type="hidden" />
+					<div id="pub_uploader_picker" class="mui-hidden"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

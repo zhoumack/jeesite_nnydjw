@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.shenpi.dao.WeixiuDao">
+    
+	<sql id="weixiuColumns">
+		a.id AS "id",
+		a.esource AS "esource",
+		a.user_id AS "user.id",
+		a.user_name AS "userName",
+		a.truster_id AS "truster.id",
+		a.item AS "item",
+		a.event AS "event",
+		a.date AS "date",
+		a.fee AS "fee",
+		a.filepath AS "filepath",
+		a.approve AS "approve",
+		a.copy AS "copy",
+		a.worker AS "worker",
+		a.donedate AS "donedate",
+		a.cost AS "cost",
+		a.result AS "result",
+		a.status AS "status",
+		a.url AS "url",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.proc_ins_id AS "procInsId",
+		a.house_number AS "houseNumber",
+		u2.name AS "user.name"
+	</sql>
+	
+	<sql id="weixiuJoins">
+		LEFT JOIN sys_user u2 ON u2.id = a.user_id
+		LEFT JOIN sys_user u3 ON u3.id = a.truster_id
+	</sql>
+    
+	<select id="get" resultType="Weixiu">
+		SELECT 
+			<include refid="weixiuColumns"/>
+		FROM t_weixiu a
+		<include refid="weixiuJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Weixiu">
+		SELECT 
+			a.id AS "id",
+			a.esource AS "esource",
+			a.user_id AS "user.id",
+			a.user_name AS "userName",
+			a.truster_id AS "truster.id",
+			a.item AS "item",
+			a.event AS "event",
+			a.date AS "date",
+			a.fee AS "fee",
+			a.filepath AS "filepath",
+			a.approve AS "approve",
+			a.copy AS "copy",
+			a.worker AS "worker",
+			a.donedate AS "donedate",
+			a.cost AS "cost",
+			a.result AS "result",
+			a.status AS "status",
+			a.url AS "url",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.proc_ins_id AS "procInsId",
+			a.house_number AS "houseNumber",
+			u2.name AS "user.name",
+			'设备维修'  as "ActType"
+		FROM t_weixiu a
+		<include refid="weixiuJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<choose>
+				<when test="user!=null and user.id!=null  and user.id!=''">
+					and a.user_id = #{user.id}
+				</when>
+			</choose>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findCaoSongList" resultType="Weixiu">
+		SELECT 
+			a.id AS "id",
+			a.esource AS "esource",
+			a.user_id AS "user.id",
+			a.user_name AS "userName",
+			a.truster_id AS "truster.id",
+			a.item AS "item",
+			a.event AS "event",
+			a.date AS "date",
+			a.fee AS "fee",
+			a.filepath AS "filepath",
+			a.approve AS "approve",
+			a.copy AS "copy",
+			a.worker AS "worker",
+			a.donedate AS "donedate",
+			a.cost AS "cost",
+			a.result AS "result",
+			a.status AS "status",
+			a.url AS "url",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.proc_ins_id AS "procInsId",
+			u2.name AS "user.name",
+			a.house_number AS "houseNumber",
+			'维修'  as "ActType"
+		
+		FROM t_weixiu a
+		<include refid="weixiuJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			and a.copy LIKE 
+				<if test="dbName == 'oracle'">'%'||#{copy}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{copy}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{copy},'%')</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Weixiu">
+		SELECT 
+			<include refid="weixiuColumns"/>
+		FROM t_weixiu a
+		<include refid="weixiuJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_weixiu(
+			id,
+			esource,
+			user_id,
+			user_name,
+			truster_id,
+			item,
+			event,
+			date,
+			fee,
+			filepath,
+			approve,
+			copy,
+			worker,
+			donedate,
+			cost,
+			result,
+			status,
+			url,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			proc_ins_id,
+			house_number
+		) VALUES (
+			#{id},
+			#{esource},
+			#{user.id},
+			#{userName},
+			#{truster.id},
+			#{item},
+			#{event},
+			#{date},
+			#{fee},
+			#{filepath},
+			#{approve},
+			#{copy},
+			#{worker},
+			#{donedate},
+			#{cost},
+			#{result},
+			#{status},
+			#{url},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{procInsId},
+			#{houseNumber}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_weixiu SET 	
+			esource = #{esource},
+			user_id = #{user.id},
+			user_name = #{userName},
+			truster_id = #{truster.id},
+			item = #{item},
+			event = #{event},
+			date = #{date},
+			fee = #{fee},
+			filepath = #{filepath},
+			approve = #{approve},
+			copy = #{copy},
+			worker = #{worker},
+			donedate = #{donedate},
+			cost = #{cost},
+			result = #{result},
+			status = #{status},
+			url = #{url},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			proc_ins_id = #{procInsId},
+			house_number = #{houseNumber}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE t_weixiu SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

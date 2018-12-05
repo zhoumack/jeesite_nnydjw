@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.act.dao.ActHiProcinstDao">
+    
+	<sql id="actHiProcinstColumns">
+		a.id_ AS "id",
+		a.proc_inst_id_ AS "procInstId",
+		a.business_key_ AS "businessKey",
+		a.proc_def_id_ AS "procDefId",
+		a.start_time_ AS "startTime",
+		a.end_time_ AS "endTime",
+		a.duration_ AS "duration",
+		a.start_user_id_ AS "startUserId",
+		a.start_act_id_ AS "startActId",
+		a.end_act_id_ AS "endActId",
+		a.super_process_instance_id_ AS "superProcessInstanceId",
+		a.delete_reason_ AS "deleteReason",
+		a.tenant_id_ AS "tenantId",
+		a.name_ AS "name",
+		u.login_name AS "user.loginName",
+		u.name AS "user.name",
+		u.office_id AS "user.office.id"
+	</sql>
+	
+	<sql id="actHiProcinstJoins">
+		left join sys_user u on u.login_name = a.start_user_id_
+		left join sys_office o on o.id = u.office_id
+	</sql>
+    
+	<select id="get" resultType="ActHiProcinst">
+		SELECT 
+			<include refid="actHiProcinstColumns"/>
+		FROM act_hi_procinst a
+		<include refid="actHiProcinstJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ActHiProcinst">
+		SELECT 
+			<include refid="actHiProcinstColumns"/>
+		FROM act_hi_procinst a
+		<include refid="actHiProcinstJoins"/>
+		<where>
+		       1=1
+			<if test="startTime != null and startTime != ''">
+				AND a.start_time_ <![CDATA[ >= #{startTime} ]]>
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND a.end_time_ <![CDATA[ <= #{endTime} ]]>
+			</if>
+			<if test="finish== true">
+				AND a.end_time_  is not null
+			</if>
+			<if test="finish!= true">
+				AND a.end_time_  is null
+			</if>
+			<if test="sqlMap.dsf != null or sqlMap.dsf != ''">
+				${sqlMap.dsf}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+					ORDER BY a.start_time_ desc
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ActHiProcinst">
+		SELECT 
+			<include refid="actHiProcinstColumns"/>
+		FROM act_hi_procinst a
+		<include refid="actHiProcinstJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO act_hi_procinst(
+			id_,
+			proc_inst_id_,
+			business_key_,
+			proc_def_id_,
+			start_time_,
+			end_time_,
+			duration_,
+			start_user_id_,
+			start_act_id_,
+			end_act_id_,
+			super_process_instance_id_,
+			delete_reason_,
+			tenant_id_,
+			name_
+		) VALUES (
+			#{id},
+			#{procInstId},
+			#{businessKey},
+			#{procDefId},
+			#{startTime},
+			#{endTime},
+			#{duration},
+			#{startUserId},
+			#{startActId},
+			#{endActId},
+			#{superProcessInstanceId},
+			#{deleteReason},
+			#{tenantId},
+			#{name}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE act_hi_procinst SET 	
+			id_ = #{id},
+			proc_inst_id_ = #{procInstId},
+			business_key_ = #{businessKey},
+			proc_def_id_ = #{procDefId},
+			start_time_ = #{startTime},
+			end_time_ = #{endTime},
+			duration_ = #{duration},
+			start_user_id_ = #{startUserId},
+			start_act_id_ = #{startActId},
+			end_act_id_ = #{endActId},
+			super_process_instance_id_ = #{superProcessInstanceId},
+			delete_reason_ = #{deleteReason},
+			tenant_id_ = #{tenantId},
+			name_ = #{name}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM act_hi_procinst
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

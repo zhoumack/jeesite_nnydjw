@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="css/mui.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/icons-extra.css" />
+    <title>请假申请详情</title>
+    <style>
+    	.head_menu{
+			width: 100%;
+			height: 50px;
+			background-color: #318df0;
+		}
+		.head_menu p{
+			font-size: 15px;
+			color: white;
+			text-align: center;
+			line-height: 50px;
+		}
+		.head_menu img{
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			top: 14px;
+			left: 5px;
+		}
+    	.mui-bar{
+				background-color: #318df0;
+			}
+		.mui-title{
+			color: #fff;
+		}
+    	body, html{
+    		background: #f5f5f5;
+    	}
+		.sp_dv{
+	    	width: 50px;
+	    	height: 15px;
+	    	border: 1px solid  #74C3F9;
+	    	text-align: center;
+	    	line-height: 13px;
+	    	position: absolute;
+	    	top:17px;
+	    	left: 200px;
+	    	border-radius: 3px;
+	    }
+	    .sp_dv span{
+	    	color: #387AC9;
+	    	font-size: 12px;
+	    }
+		.center_dv{
+			background-color: #FFFFFF;
+			border-bottom: 1px solid #DCDCDC;
+		}
+		.center_dv_dv{
+			padding-left: 15px;padding-top: 15px;
+		}
+		.center_dv_dv span{
+			padding-left: 50px;font-size: 18px;
+		}
+		.center_dv_dv img{
+			position: absolute;
+			left: 20px;
+		}
+		.center_dv_dv2{
+			padding: 15px;color: #887F7F;
+		}
+		.center_span{
+			padding: 5px;
+		}
+		.center_span_s2{
+			padding-left: 20px;color: #000000;
+		}
+		.liu_dv{
+			background-color: #ffffff;
+			border-bottom: 1px solid #DCDCDC;
+			border-top: 1px solid #DCDCDC;
+			margin-top: 10px;
+		}
+		.liu_dv_p1{
+			padding: 15px;
+			color: #887f7f;
+		}
+		.liu_dv_dv{
+			padding-left: 16px;
+		}
+		.liu_dv_dv img{
+			margin-right: 10px;
+		}
+		.xian{
+			margin-left: 15px;
+			width: 95%;
+			height: 1px;
+			background-color: #DCDCDC;
+		}
+		.liu_dv_p2{
+			padding: 15px;color: #887f7f;font-size: 13px;
+		}
+		.footer_op{
+			width:100%;background-color: #Ffffff;
+			border-top: 1px solid #DCDCDC;
+			position:fixed;
+			bottom: 0;
+			z-index: 999;
+		}
+		.caozuo{
+			width: 50%;
+			height: 40px;
+			text-align: center;
+			line-height: 40px;
+			float: left;
+		}
+		#relist{
+			background-color:  #ECECEC;width: 60%;float: right;display: none;
+		}
+		.mui-input-row input{
+			border: none;margin-bottom: inherit;
+		}
+    </style>
+</head>
+<body>
+	<!--头部-->
+	<div class="head_menu">
+		<a href="woshenpi1.html">
+			<img  src="img/fanhui.png"/>
+		</a>
+		<p>请假详情</p>
+	</div>
+	<!--内容区-->
+	<div class="mui-scroll-wrapper" style="margin-top: 45px;">
+		<div class="mui-scroll">
+			<div class="center_dv">
+				<div class="center_dv_dv">
+					<img src="img/header.jpg" width="30px" height="30px"/>
+					<span>黄蓉的请假申请</span>
+				</div>
+				<div class="sp_dv">
+		        	<span id="shenpi">审批中</span>
+		        </div>
+				<div class="center_dv_dv2">
+					<div class="center_span">
+						<span>申请姓名</span>
+						<span class="center_span_s2">黄蓉</span>
+					</div>
+					<div class="center_span">
+						<span>请假类型</span>
+						<span class="center_span_s2">年假</span>
+					</div>
+					<div class="center_span">
+						<span>开始时间</span>
+						<span class="center_span_s2">2018/10/8  上午</span>
+					</div>
+					<div class="center_span">
+						<span>截止时间</span>
+						<span class="center_span_s2">2018/10/9  上午</span>
+					</div>
+					<div class="center_span">
+						<span>请假时长</span>
+						<span class="center_span_s2">1天</span>
+					</div>
+					<div class="center_span">
+						<span>请假事由</span>
+						<span class="center_span_s2">有事</span>
+					</div>
+					<div class="center_span">
+						<span>说明附件</span>
+						<span class="center_span_s2">无</span>
+					</div>
+				</div>
+			</div>
+			<!--审批流程-->
+			<div class="liu_dv">
+				<p class="liu_dv_p1">审批流程</p>
+				<div class="liu_dv_dv" style="margin-bottom: 15px;">
+					<img id="" src="img/yuan.png" width="20px" height="20px" />
+					<img src="img/header.jpg" width="20px" height="20px"/>
+					<span>
+						经理.审批中
+						<img id="ren" src="img/top.png" width="18px" height="18px" />
+					</span>
+					<div id="relist">
+						<div style="padding: 10px;"> 
+							<img src="img/header.jpg" width="30px" height="30px" />
+							<span>杨洋</span>
+						</div>
+						<div style="padding: 10px;">
+							<img src="img/header.jpg" width="30px" height="30px" />
+							<span>吴京</span>
+						</div>
+						
+					</div>
+					<br style="clear:both;">
+				</div>
+				<div class="xian"></div>
+				<p class="liu_dv_p2">抄送人：邹玉、张三</p>
+			</div>
+		</div>
+	</div>
+	<!--底部导航-->
+    <div class="footer_op">
+	    <div style="padding-left: 15px;">
+	    	<div class="mui-input-row">
+				<input type="text" placeholder="审批意见">
+			</div>
+	    </div>
+    	<div class="xian"></div>
+		<div class="caozuo" id="tongyi">
+			<img  src="img/tongyi.png" width="20px" height="20px"/>
+			同意
+		</div>
+		<div class="caozuo" id="jujue">
+			<img  src="img/bohui.png" width="20px" height="20px"/>
+			拒绝
+		</div>
+    </div>
+    <script type="text/javascript" src="js/jquery.min.js" ></script>
+    <script type="text/javascript" src="js/mui.min.js" ></script>
+    <script>
+    	mui('.mui-scroll-wrapper').scroll({
+			deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+		});
+    	var ren =$("#ren");
+//  	var display = $("#relist").find("style").attr("")
+    	ren.click(function(){
+    		$("#relist").toggle();
+    	});
+    	$("#tongyi").click(function(){
+    		mui.alert('已完成审批！', function() {
+    			$("#shenpi").html("已通过");
+    			$(".sp_dv").css("border","1px solid  #5aca5e");
+    			$(".sp_dv span").css("color","#5aca5e");
+			});
+    	});
+    </script>
+</body>
+</html>

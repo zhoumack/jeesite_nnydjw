@@ -1,0 +1,147 @@
+body,
+html {
+	width: 100%;
+	height: 100%;
+	line-height: normal;
+	margin: 0;
+	padding: 0;
+	background-color: #eee;
+	overflow-x: hidden;
+}
+
+input,
+textarea {
+	background-color: transparent;
+	font-size: 15px;
+	color: #666;
+	outline: none;
+}
+
+.pub_mod {
+	margin-top: 10px;
+	position: relative;
+}
+
+.pub_row {
+	background-color: white;
+	padding: 10px;
+	padding-right: 20px;
+	border-top: 1px solid #ddd;
+}
+
+.pub_uploader_row {
+	padding-right: 10px;
+}
+
+.pub_row:last-child {
+	border-bottom: 1px solid #ddd;
+}
+
+.pub_input_title {
+	position: absolute;
+	font-size: 16px;
+}
+
+.pub_input_con {
+	padding-left: 80px;
+}
+
+.pub_input {
+	width: 100%;
+	border: none !important;
+	height: 21px !important;
+	margin-bottom: 0 !important;
+	text-align: right;
+	padding: 0 !important;
+}
+
+.pub_textarea_title {}
+
+.pub_textarea_con,
+.pub_uploader_con {
+	padding-top: 10px;
+}
+
+.pub_textarea {
+	width: 100%;
+	resize: none;
+	border: none;
+	height: 70px;
+}
+
+.pub_textarea_num {
+	text-align: right;
+	font-size: 13px;
+	color: #999;
+}
+
+.pub_radio_title {
+	top: 13px;
+}
+
+.pub_radio_label {
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
+}
+
+.pub_radio_input {
+	top: 0 !important;
+}
+
+.pub_uploader_one {
+	margin: 5px;
+	width: 60px;
+	height: 60px;
+}
+
+.pub_uploader_div {
+	display: inline-table;
+	position: relative;
+	height: 110px;
+}
+
+.pub_uploader_a {
+	display: inline-block;
+	margin: 5px;
+	width: 60px;
+	height: 60px;
+	background: url(../img/tianjia.png);
+	background-size: 100% 100%;
+}
+
+.pub_uploader_a:active {
+	opacity: 0.5;
+}
+
+.uploader_del {
+	background-color: red;
+	color: white;
+	position: absolute;
+	z-index: 999;
+	right: 0;
+	top: -3px;
+	font-size: 8px;
+	padding: 4px 5px;
+}
+
+.uploader_del:after {
+	content: 'X';
+}
+
+.upload_progressbar {
+	height: 2px;
+}
+
+.pub_upload_progressbar_div {
+	display: block;
+	padding: 0 5px;
+}
+
+.upload_res_btn {
+	font-size: 13px;
+}
+
+.upload_scsb {
+	color: red;
+	font-size: 12px;
+}

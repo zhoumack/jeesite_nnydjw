@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.actfenpei.dao.ActFenpeiUserDao">
+    
+	<sql id="actFenpeiUserColumns">
+		a.id AS "id",
+		a.apply_user_id AS "applyUserId.id",
+		a.office_id AS "office.id",
+		a.user_id AS "user.id",
+		a.starttime AS "starttime",
+		a.endtime AS "endtime",
+		a.task_comment AS "taskComment",
+		a.task_remarks AS "taskRemarks",
+		a.proc_def_key AS "procDefKey",
+		a.proc_ins_id AS "procInsId",
+		a.task_id AS "taskId",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		o3.name AS "office.name",
+		u4.name AS "user.name"
+	</sql>
+	
+	<sql id="actFenpeiUserJoins">
+		LEFT JOIN sys_office o3 ON o3.id = a.office_id
+		LEFT JOIN sys_user u4 ON u4.id = a.user_id
+	</sql>
+    
+	<select id="get" resultType="ActFenpeiUser">
+		SELECT 
+			<include refid="actFenpeiUserColumns"/>
+		FROM t_act_fenpei_user a
+		<include refid="actFenpeiUserJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ActFenpeiUser">
+		SELECT 
+			<include refid="actFenpeiUserColumns"/>
+		FROM t_act_fenpei_user a
+		<include refid="actFenpeiUserJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+				<if test="user!=null and user.id !=null and user.id !='' ">
+					  	and a.user_id = #{user.id}
+				</if>
+				<if test="taskId !=null and taskId!=''  ">
+					  	and a.task_id = #{taskId}
+				</if>
+				<if test=" procInsId!=null  and procInsId!=''  ">
+					  	and a.proc_ins_id = #{procInsId}
+				</if>
+				<if test="procDefKey!=null  and procDefKey!='' ">
+					  	and a.proc_def_key = #{procDefKey}
+				</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ActFenpeiUser">
+		SELECT 
+			<include refid="actFenpeiUserColumns"/>
+		FROM t_act_fenpei_user a
+		<include refid="actFenpeiUserJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_act_fenpei_user(
+			id,
+			apply_user_id,
+			office_id,
+			user_id,
+			starttime,
+			endtime,
+			task_comment,
+			task_remarks,
+			proc_def_key,
+			proc_ins_id,
+			task_id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{applyUserId.id},
+			#{office.id},
+			#{user.id},
+			#{starttime},
+			#{endtime},
+			#{taskComment},
+			#{taskRemarks},
+			#{procDefKey},
+			#{procInsId},
+			#{taskId},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_act_fenpei_user SET 	
+			apply_user_id = #{applyUserId.id},
+			office_id = #{office.id},
+			user_id = #{user.id},
+			starttime = #{starttime},
+			endtime = #{endtime},
+			task_comment = #{taskComment},
+			task_remarks = #{taskRemarks},
+			proc_def_key = #{procDefKey},
+			proc_ins_id = #{procInsId},
+			task_id = #{taskId},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE t_act_fenpei_user SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

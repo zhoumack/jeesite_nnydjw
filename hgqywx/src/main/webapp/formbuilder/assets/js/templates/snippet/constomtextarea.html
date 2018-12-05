@@ -1,0 +1,19 @@
+<!-- Textarea -->
+<div class="pub_mod">
+	<div class="pub_row">
+		<div class="pub_textarea_title"><%- label %></div>
+		<div class="pub_textarea_con">
+			<textarea  id="<%- id %>" 
+			name="<%- id %>"  
+			class="pub_textarea" 
+			<% if(placeholder) { %> placeholder="<%- placeholder %>" <% } %>
+			<% if(required) {%> required <% } %>
+			data-label=<%- label %>
+            data-validation=<%- validationrule %>
+			></textarea>
+		</div>
+		<div class="pub_textarea_num">
+			<span class="pub_textarea_num1">0</span>&nbsp;/&nbsp;<span class="pub_textarea_num2">500</span>
+		</div>
+	</div>
+</div>

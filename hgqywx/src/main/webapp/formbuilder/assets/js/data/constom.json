@@ -1,0 +1,208 @@
+[
+  {
+    "title": "Constom Text Input",
+    "fields": {
+      "id": {
+        "label": "ID / Name",
+        "type": "input",
+        "value": "constomtextinput"
+      },
+      "label": {
+        "label": "Label Text",
+        "type": "input",
+        "value": "文本框"
+      },
+      "placeholder": {
+        "label": "Placeholder",
+        "type": "input",
+        "value": "提示文本"
+      },
+      "required": {
+        "label": "Required",
+        "type": "checkbox",
+        "value": false
+      },
+      "validationrule": {
+        "label": "验证规则",
+        "type": "constom-validation",
+        "value": null
+      }
+    }
+  },
+  {
+    "title": "Constom Text Area",
+    "fields": {
+      "id": {
+        "label": "ID / Name",
+        "type": "input",
+        "value": "textarea"
+      },
+      "label": {
+        "label": "Label Text",
+        "type": "input",
+        "value": "文本域"
+      },
+      "placeholder": {
+        "label": "Starting Text",
+        "type": "textarea",
+        "value": "默认文本"
+      },
+      "required": {
+        "label": "Required",
+        "type": "checkbox",
+        "value": false
+      },
+      "validationrule": {
+        "label": "验证规则",
+        "type": "constom-validation",
+        "value": null
+      }
+    }
+  },
+  {
+    "title": "Constom Time selecter",
+    "fields": {
+      "id": {
+        "label": "ID / Name",
+        "type": "input",
+        "value": "textarea"
+      },
+      "label": {
+        "label": "Label Text",
+        "type": "input",
+        "value": "时间选择器"
+      },
+      "required": {
+        "label": "Required",
+        "type": "checkbox",
+        "value": false
+      },
+      "validationrule": {
+        "label": "验证规则",
+        "type": "constom-validation",
+        "value": null
+      }
+    }
+  },
+  {
+    "title": "Constom select",
+    "fields": {
+      "id": {
+        "label": "ID / Name",
+        "type": "input",
+        "value": "constomselecter"
+      },
+      "label": {
+        "label": "Label Text",
+        "type": "input",
+        "value": "自定义选择器"
+      },
+      "placeholder": {
+        "label": "Placeholder",
+        "type": "input",
+        "value": "提示文本"
+      },
+      "data": {
+        "label": "数据来源",
+        "type": "input",
+        "value": "${collection }"
+      },
+      "selecttype": {
+        "label": "Input Size",
+        "type": "select",
+        "value": [
+          {
+            "value": "pub_sel_zdy",
+            "label": "一级选择",
+            "selected": true
+          },
+          {
+            "value": "pub_sel_zdy_two",
+            "label": "二级选择",
+            "selected": false
+          }
+        ]
+      },
+      "required": {
+        "label": "Required",
+        "type": "checkbox",
+        "value": false
+      },
+      "validationrule": {
+        "label": "验证规则",
+        "type": "constom-validation",
+        "value": null
+      }
+    }
+  },
+  {
+    "title": "Constom fileupload",
+    "fields": {
+      "id": {
+        "label": "ID / Name",
+        "type": "input",
+        "value": "constomfileupload"
+      },
+      "label": {
+        "label": "Label Text",
+        "type": "input",
+        "value": "文件上传"
+      }
+    }
+  },
+  {
+    "title": "Constom submitbutton",
+    "fields": {
+      "id": {
+        "label": "ID / Name",
+        "type": "input",
+        "value": "constomsubmitbutton"
+      },
+      "buttontext": {
+        "label": "Button text",
+        "type": "input",
+        "value": "提交"
+      },
+      "submiturl": {
+        "label": "提交地址",
+        "type": "input",
+        "value": "xxx/xxx"
+      }
+    }
+  },
+  {
+    "title": "Constom agreesubmitbutton",
+    "fields": {
+      "id": {
+        "label": "ID / Name",
+        "type": "input",
+        "value": "constomagreesubmitbutton"
+      },
+      "submiturl": {
+        "label": "提交地址",
+        "type": "input",
+        "value": "xxx/xxx"
+      },
+      "button1label": {
+        "label": "Button Label1",
+        "type": "input",
+        "value": "同意"
+      },
+      "button1value": {
+        "label": "Button Value1",
+        "type": "input",
+        "value": 0
+      },
+      "button2label": {
+        "label": "Button Label2",
+        "type": "input",
+        "value": "不同意"
+      },
+      "button2value": {
+        "label": "Button Value2",
+        "type": "input",
+        "value": 1
+      }
+    }
+  }
+]

@@ -1,0 +1,275 @@
+<html> 
+	<head> 
+		<title>综合事务</title> 
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.head_menu{
+				width: 100%;
+				height: 50px;
+				background-color: #318df0;
+			}
+			.head_menu p{
+				font-size: 15px;
+				color: white;
+				text-align: center;
+				line-height: 50px;
+			}
+			.head_menu img{
+				width: 20px;
+				height: 20px;
+				position: absolute;
+				top: 14px;
+				left: 5px;
+			}
+			.cent_menus{
+			  position:relative;
+			  overflow:hidden;
+			}
+			.cent_menu{
+			  position:relative;
+			  float:left;
+			  padding:20px 10px;
+			  width:33.33333333%;
+			  box-sizing:border-box;
+			}
+			.cent_menu:before{
+			  content:" ";
+			  position:absolute;
+			  right:0;
+			  top:0;
+			  width:1px;
+			  bottom:0;
+			  border-right:1px solid #D9D9D9;
+			  color:#D9D9D9;
+			  -webkit-transform-origin:100% 0;
+			          transform-origin:100% 0;
+			  -webkit-transform:scaleX(0.5);
+			          transform:scaleX(0.5);
+			}
+			.cent_menu:after{
+			  content:" ";
+			  position:absolute;
+			  left:0;
+			  bottom:0;
+			  right:0;
+			  height:1px;
+			  border-bottom:1px solid #D9D9D9;
+			  color:#D9D9D9;
+			  -webkit-transform-origin:0 100%;
+			          transform-origin:0 100%;
+			  -webkit-transform:scaleY(0.5);
+			          transform:scaleY(0.5);
+			}
+			.cent_menu:active{
+			  background-color:#ECECEC;
+			}
+			.cent_menu_dv{
+				width:28px;
+				height:28px;
+				margin:0 auto;
+				}
+			.cent_menu p{
+				 display:block;
+				  text-align:center;
+				  color:#887f7f;
+				  font-size:14px;
+				  white-space:nowrap;
+				  text-overflow:ellipsis;
+				  overflow:hidden;
+				  margin-top:5px;
+				  font-size: 12px;
+			}
+			.cent_menu_dv img{
+				display:block;
+				  width:80%;
+				  height:80%;
+				  margin-top:5px;
+			}
+			.footer_menu{
+				display: block;
+				width: 100%;
+				height: 60px;
+				border-top: 1px solid #D7D7D7;
+				position: absolute;
+				bottom: 0;
+				background-color: #fff;
+			}
+			.footer_menu_dv{
+				width: 33%;
+				float: left;
+				text-align: center;
+				padding-top: 11px;
+				line-height: 14px;
+			}
+			.footer_menu_dv p{
+				color: #887f7f;
+				font-size: 12px;
+				padding-top: 5px;
+			}
+			a{
+				text-decoration: none;
+			}
+			.overlay{position: fixed;top: 0px;left: 0px;right: 0px;bottom: 0px;}
+			.overlay-content { position: relative;height:89%; overflow: scroll;}
+			.scrolling{ -webkit-overflow-scrolling: touch;}
+			.footer_menu{
+				display: block;
+				width: 100%;
+				height: 60px;
+				border-top: 1px solid #D7D7D7;
+				position: absolute;
+				bottom: 0;
+				background-color: #fff;
+				z-index: 999;
+			}
+			.footer_menu_dv{
+				width: 33%;
+				float: left;
+				text-align: center;
+				padding-top: 11px;
+				line-height: 14px;
+			}
+			.footer_menu_dv p{
+				color: #887f7f;
+				font-size: 12px;
+				padding-top: 5px;
+			}
+		</style>
+	</head> 
+	<body> 
+		<div class="head_menu">
+			<a href="index1.html">
+				<img  src="img/fanhui.png"/>
+			</a>
+			<p>综合事务</p>
+		</div>
+		<!--九宫格内容区-->
+		<div class="mui-scroll-wrapper" style="position: absolute;top:50px;">
+			<div class="mui-scroll">
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/chuchai.png"/>
+					</div>
+					<p>出差申请</p>
+				</a>
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/qingjia.png"/>
+					</div>
+					<p>请假申请</p>
+				</a>
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/yongzhang.png"/>
+					</div>
+					<p>用章申请</p>
+				</a>
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/jiaban.png"/>
+					</div>
+					<p>加班申请</p>
+				</a>
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/weihu.png"/>
+					</div>
+					<p>设备维修</p>
+				</a>
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/waichu.png"/>
+					</div>
+					<p>外出申请</p>
+				</a>
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/bangongyongp.png"/>
+					</div>
+					<p>办公用品</p>
+				</a>
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/yongjing.png"/>
+					</div>
+					<p>用警申请</p>
+				</a>
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/huiyiguanli.png"/>
+					</div>
+					<p>会议管理</p>
+				</a>
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/bangongqu.png"/>
+					</div>
+					<p>办公区申请</p>
+				</a>
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/chuchai.png"/>
+					</div>
+					<p>任务安排</p>
+				</a>
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/gongzuohb.png"/>
+					</div>
+					<p>工作汇报</p>
+				</a>
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/jeidai.png"/>
+					</div>
+					<p>接待申请</p>
+				</a>
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/paiche.png"/>
+					</div>
+					<p>派车申请</p>
+				</a>
+				<a href="#" class="cent_menu">
+					<div class="cent_menu_dv">
+						<img src="img/gongwen.png"/>
+					</div>
+					<p>公文流转</p>
+				</a>
+			</div>
+		</div>
+		<!--底部导航-->
+		<div class="footer_menu">
+			<div class="footer_menu_dv">
+				<a href="#">
+					<img src="img/new.png" width="20px" height="20px"/>
+					<p>新申请</p>
+				</a>
+			</div>
+			<div class="footer_menu_dv">
+				<a href="woshenpi1.html">
+					<img src="img/shenpi.png" width="20px" height="20px"/>
+					<p>我审批的</p>
+				</a>
+			</div>
+			<div class="footer_menu_dv">
+				<a href="yitijiao1.html">
+					<img src="img/tijiao1.png" width="20px" height="20px"/>
+					<p>已提交</p>
+				</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/mui.min.js" ></script>
+		<script>
+			mui('.mui-scroll-wrapper').scroll({
+			deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+		});
+		</script>
+	</body> 
+</html> 

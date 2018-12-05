@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.shenpi.dao.BgyplqDao">
+    
+	<sql id="bgyplqColumns">
+		a.id AS "id",
+		a.user_id AS "user.id",
+		a.user_name AS "userName",
+		a.usefor AS "usefor",
+		a.bgyp_id AS "bgypId",
+		a.item AS "item",
+		a.itemnums AS "itemnums",
+		a.date AS "date",
+		a.filepath AS "filepath",
+		a.approve AS "approve",
+		a.copy AS "copy",
+		a.status AS "status",
+		a.url AS "url",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.proc_ins_id AS "procInsId",
+		a.house_number AS "houseNumber",
+		a.esource AS "esource",
+		u2.name AS "user.name"
+	</sql>
+	
+	<sql id="bgyplqJoins">
+		LEFT JOIN sys_user u2 ON u2.id = a.user_id
+	</sql>
+    
+	<select id="get" resultType="Bgyplq">
+		SELECT 
+			<include refid="bgyplqColumns"/>
+		FROM t_bgyplq a
+		<include refid="bgyplqJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Bgyplq">
+		SELECT 
+			a.id AS "id",
+			a.user_id AS "user.id",
+			a.user_name AS "userName",
+			a.usefor AS "usefor",
+			a.bgyp_id AS "bgypId",
+			a.item AS "item",
+			a.itemnums AS "itemnums",
+			a.date AS "date",
+			a.filepath AS "filepath",
+			a.approve AS "approve",
+			a.copy AS "copy",
+			a.status AS "status",
+			a.url AS "url",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.proc_ins_id AS "procInsId",
+		    a.house_number AS "houseNumber",
+		    a.esource AS "esource",
+			u2.name AS "user.name",
+			'耗材配件'  as "ActType"
+		FROM t_bgyplq a
+		<include refid="bgyplqJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<choose>
+				<when test="user!=null and user.id!=null  and user.id!=''">
+					and a.user_id = #{user.id}
+				</when>
+			</choose>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findCaoSongList" resultType="Bgyplq">
+		SELECT 
+			a.id AS "id",
+			a.user_id AS "user.id",
+			a.user_name AS "userName",
+			a.usefor AS "usefor",
+			a.bgyp_id AS "bgypId",
+			a.item AS "item",
+			a.itemnums AS "itemnums",
+			a.date AS "date",
+			a.filepath AS "filepath",
+			a.approve AS "approve",
+			a.copy AS "copy",
+			a.status AS "status",
+			a.url AS "url",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.proc_ins_id AS "procInsId",
+			u2.name AS "user.name",
+		    a.house_number AS "houseNumber",
+		    a.esource AS "esource",
+			'耗材配件'  as "ActType"
+		
+		FROM t_bgyplq a
+		<include refid="bgyplqJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			and a.copy LIKE 
+				<if test="dbName == 'oracle'">'%'||#{copy}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{copy}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{copy},'%')</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Bgyplq">
+		SELECT 
+			<include refid="bgyplqColumns"/>
+		FROM t_bgyplq a
+		<include refid="bgyplqJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_bgyplq(
+			id,
+			user_id,
+			user_name,
+			usefor,
+			bgyp_id,
+			item,
+			itemnums,
+			date,
+			filepath,
+			approve,
+			copy,
+			status,
+			url,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			proc_ins_id,
+			house_number,
+			esource
+		) VALUES (
+			#{id},
+			#{user.id},
+			#{userName},
+			#{usefor},
+			#{bgypId},
+			#{item},
+			#{itemnums},
+			#{date},
+			#{filepath},
+			#{approve},
+			#{copy},
+			#{status},
+			#{url},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{procInsId},
+			#{houseNumber},
+			#{esource}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_bgyplq SET 	
+			user_id = #{user.id},
+			user_name = #{userName},
+			usefor = #{usefor},
+			bgyp_id = #{bgypId},
+			item = #{item},
+			itemnums = #{itemnums},
+			date = #{date},
+			filepath = #{filepath},
+			approve = #{approve},
+			copy = #{copy},
+			status = #{status},
+			url = #{url},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			proc_ins_id = #{procInsId},
+			house_number = #{houseNumber},
+			esource = #{esource}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE t_bgyplq SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

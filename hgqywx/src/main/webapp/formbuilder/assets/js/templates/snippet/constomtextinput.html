@@ -1,0 +1,18 @@
+<!-- Text input-->
+<div class="pub_mod">
+    <div class="pub_row">
+        <span class="pub_input_title"><%- label %></span>
+        <div class="pub_input_con">
+            <input 
+                id="<%- id %>"
+                name="<%- id %>"
+                type="text"
+                <% if(placeholder) { %> placeholder="<%- placeholder %>" <% } %>
+                class="pub_input"
+                <% if(required) {%> required <% } %> 
+                data-label=<%- label %> 
+                data-validation=<%- validationrule %>
+            />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.store.dao.TBgypLogDao">
+    
+	<sql id="tBgypLogColumns">
+		a.id AS "id",
+		a.bgyp_id AS "bgypId",
+		a.name AS "name",
+		a.inout_flag AS "inoutFlag",
+		a.nums AS "nums",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remark AS "remark",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="tBgypLogJoins">
+	</sql>
+    
+	<select id="get" resultType="TBgypLog">
+		SELECT 
+			<include refid="tBgypLogColumns"/>
+		FROM t_bgyp_log a
+		<include refid="tBgypLogJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="TBgypLog">
+		SELECT 
+			<include refid="tBgypLogColumns"/>
+		FROM t_bgyp_log a
+		<include refid="tBgypLogJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="inoutFlag != null and inoutFlag != ''">
+				AND a.inout_flag = #{inoutFlag}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="TBgypLog">
+		SELECT 
+			<include refid="tBgypLogColumns"/>
+		FROM t_bgyp_log a
+		<include refid="tBgypLogJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_bgyp_log(
+			id,
+			bgyp_id,
+			name,
+			inout_flag,
+			nums,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remark,
+			del_flag
+		) VALUES (
+			#{id},
+			#{bgypId},
+			#{name},
+			#{inoutFlag},
+			#{nums},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remark},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_bgyp_log SET 	
+			bgyp_id = #{bgypId},
+			name = #{name},
+			inout_flag = #{inoutFlag},
+			nums = #{nums},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE t_bgyp_log SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 查询物品操作记录(后台) -->
+	<select id="findLogList" resultType="com.thinkgem.jeesite.modules.store.vo.TBgypLogExt">
+		SELECT 
+			<include refid="tBgypLogColumns"/>
+			,b.`business_type` AS "businessType" 
+		FROM t_bgyp_log a 
+		LEFT JOIN t_bgyp b 
+          ON a.`bgyp_id` = b.`id` 
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="inoutFlag != null and inoutFlag != ''">
+				AND a.inout_flag = #{inoutFlag} 
+			</if>
+			<if test="businessType != null and businessType != ''">
+				AND b.business_type = #{businessType}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+</mapper>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.item.dao.ChurukuDao">
+    
+	<sql id="churukuColumns">
+		a.id AS "id",
+		a.businessid AS "businessid",
+		a.type AS "type",
+		a.user_id AS "user.id",
+		a.user_name AS "userName",
+		a.date AS "date",
+		a.create_by AS "createBy.id",
+		a.crate_date AS "crateDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		u3.name AS "user.name"
+	</sql>
+	
+	<sql id="churukuJoins">
+		LEFT JOIN sys_user u3 ON u3.id = a.user_id
+	</sql>
+    
+	<select id="get" resultType="Churuku">
+		SELECT 
+			<include refid="churukuColumns"/>
+		FROM t_churuku a
+		<include refid="churukuJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Churuku">
+		SELECT 
+			<include refid="churukuColumns"/>
+		FROM t_churuku a
+		<include refid="churukuJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Churuku">
+		SELECT 
+			<include refid="churukuColumns"/>
+		FROM t_churuku a
+		<include refid="churukuJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_churuku(
+			id,
+			businessid
+			type,
+			user_id,
+			user_name,
+			date,
+			create_by,
+			crate_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{businessid},
+			#{type},
+			#{user.id},
+			#{userName},
+			#{date},
+			#{createBy.id},
+			#{crateDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_churuku SET
+			businessid = #{businessid}, 	
+			type = #{type},
+			user_id = #{user.id},
+			user_name = #{userName},
+			date = #{date},
+			crate_date = #{crateDate},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE t_churuku SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

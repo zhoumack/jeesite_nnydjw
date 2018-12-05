@@ -1,0 +1,21 @@
+<!-- Select  -->
+<div>
+	<div class="pub_row">
+		<div class="pub_input_title"><%- label %></div>
+		<div class="pub_input_con">
+			<input class="pub_input <%- selecttype %>" 
+			       type="text" 
+			       <% if(placeholder) { %> placeholder="<%- placeholder %>" <% } %>
+			       readonly="readonly" 
+			       dataOptions='<%- data %>' />
+			<input type="hidden" 
+			       id="<%- id %>" 
+                   name="<%- id %>"
+                   <% if(required) {%> required <% } %> 
+                   data-label=<%- label %>
+                   data-validation=<%- validationrule %>
+			/>
+			<!--可用于存储选择的id提交-->
+		</div>
+	</div>
+</div>

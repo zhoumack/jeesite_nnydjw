@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>综合事务</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css" />
+	</head>
+	<body>
+		<style>
+			.head_menu{
+				width: 100%;
+				height: 50px;
+				background-color: #318df0;
+			}
+			.head_menu p{
+				font-size: 15px;
+				color: white;
+				text-align: center;
+				line-height: 50px;
+			}
+			.head_menu img{
+				width: 20px;
+				height: 20px;
+				position: absolute;
+				top: 14px;
+				left: 5px;
+			}
+			body{
+				color: #887F7F;
+			}
+			.mui-slider-progress-bar{
+				height: 1px;
+			}
+			.mui-control-content {
+				background-color: white;
+				/*min-height: 426px;*/
+			}
+			.mui-control-content .mui-loading {
+				margin-top: 50px;
+			}
+			.mui-title{
+				color: #fff;
+			}
+			.mui-bar{
+				background-color: #318df0;
+			}
+			.mui-control-item{
+				color: #888888;
+			}
+			.mui-active{
+				color: #318df0;
+			}
+			.footer_menu{
+				display: block;
+				width: 100%;
+				height: 60px;
+				border-top: 1px solid #D7D7D7;
+				position: absolute;
+				bottom: 0;
+				background-color: #fff;
+				z-index: 999;
+			}
+			.footer_menu_dv{
+				width: 33%;
+				float: left;
+				text-align: center;
+				padding-top: 11px;
+				line-height: 14px;
+			}
+			.footer_menu_dv p{
+				color: #887f7f;
+				font-size: 12px;
+				padding-top: 5px;
+			}
+			.sp_dv{
+		    	width: 50px;
+		    	height: 15px;
+		    	border: 1px solid  #74C3F9;
+		    	text-align: center;
+		    	line-height: 13px;
+		    	position: absolute;
+		    	top:22px;
+		    	left: 120px;
+		    	border-radius: 3px;
+		    }
+		    .sp_dv span{
+		    	color: #387AC9;
+		    	font-size: 12px;
+		    }
+		    .media_box{
+		    	background-color: #fff;display: flex;position: relative;padding: 10px;border-bottom: 1px solid  #DCDCDC;
+		    }
+		    .media_box_dv{
+		    	padding: 10px;
+		    }
+		    .media_box_dv_p{
+		    	font-size: 18px;color: #000000;
+		    }
+		    .media_box_span{
+		    	float: right;color: #808080;position: absolute;right: 9px;top: 10px;padding: 10px;
+		    }
+		    .mui-search{
+		    	position: relative;background-color: #fff;
+		    }
+		</style>
+		<header class="head_menu">
+			<p>综合事务</p>
+		</header>
+		
+		<div class="mui-input-row mui-search">
+			<input type="search" class="mui-input-clear" placeholder="">
+		</div>
+		<div class="mui-scroll-wrapper" style="position: absolute;top:95px;">
+			<div class="mui-scroll">
+				<a href="#" class="media_box" >
+					<div class="media_box_dv">
+						<p class="media_box_dv_p">黄蓉的请假</p>
+						<p>申请人：黄蓉</p>
+						<p>请假类型：年假</p>
+						<p>开始时间：2018/10/8 上午</p>
+					</div>
+					<span class="media_box_span" style="">2018/9/20</span>
+					<div class="sp_dv">
+			        	<span>审批中</span>
+			      </div> 
+				</a>
+				<a href="#" class="media_box" >
+					<div class="media_box_dv">
+						<p class="media_box_dv_p">黄蓉的请假</p>
+						<p>申请人：黄蓉</p>
+						<p>请假类型：年假</p>
+						<p>开始时间：2018/10/8 上午</p>
+					</div>
+					<span class="media_box_span" style="">2018/9/20</span>
+					<div class="sp_dv">
+			        	<span>审批中</span>
+			      </div> 
+				</a>
+				<a href="#" class="media_box" >
+					<div class="media_box_dv">
+						<p class="media_box_dv_p">黄蓉的请假</p>
+						<p>申请人：黄蓉</p>
+						<p>请假类型：年假</p>
+						<p>开始时间：2018/10/8 上午</p>
+					</div>
+					<span class="media_box_span" style="">2018/9/20</span>
+					<div class="sp_dv">
+			        	<span>审批中</span>
+			      </div> 
+				</a>
+				<a href="#" class="media_box" >
+					<div class="media_box_dv">
+						<p class="media_box_dv_p">黄蓉的请假</p>
+						<p>申请人：黄蓉</p>
+						<p>请假类型：年假</p>
+						<p>开始时间：2018/10/8 上午</p>
+					</div>
+					<span class="media_box_span" style="">2018/9/20</span>
+					<div class="sp_dv">
+			        	<span>审批中</span>
+			      </div> 
+				</a>
+			</div>
+		</div>
+		<!--底部导航-->
+    <div class="footer_menu">
+			<div class="footer_menu_dv">
+				<a href="xinshenqing.html">
+					<img src="img/new1.png" width="20px" height="20px"/>
+					<p>新申请</p>
+				</a>
+			</div>
+			<div class="footer_menu_dv">
+				<a href="woshenpi1.html">
+					<img src="img/shenpi.png" width="20px" height="20px"/>
+					<p>我审批的</p>
+				</a>
+			</div>
+			<div class="footer_menu_dv">
+				<a href="#">
+					<img src="img/tijiao.png" width="20px" height="20px"/>
+					<p>已提交</p>
+				</a>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js" ></script>
+		<script>
+			mui.init({
+				swipeBack: false
+			});
+			(function($) {
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+			})(mui);
+			var h =document.documentElement.clientHeight;
+			var h1 =h - 142;
+			$(".mui-control-content").css("min-height",h1);
+		</script>
+
+	</body>
+
+</html>

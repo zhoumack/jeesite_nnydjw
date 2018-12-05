@@ -1,0 +1,136 @@
+<label class='control-label'> <%- label %> </label>
+<input class='input-large field validation-value' data-type="<%- type %>" type="hidden" name='<%- name %>' id='<%- name %>' value ='<%- value %>' />
+
+    <a  data-target="#ruleModal" role="button" class="btn" data-toggle="modal">修改规则</a>
+    <div id="ruleModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">修改规则</h3>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-primary " id="add_rule_btn" >
+		  添加规则
+		</button>
+        <table class="table table-striped" id="rule_table">
+		   <thead>
+		     <tr>
+		        <th>规则</th>
+		        <th>值</th>
+		        <th>不匹配提示语</th>
+		     </tr>
+		   </thead>
+		   <tbody>
+		   </tbody>
+		</table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+        <button class="btn save" data-dismiss="modal" aria-hidden="true" >Save changes</button>
+      </div>
+    </div>
+<script type="text/javascript">
+   //载入
+   loadUI();
+   
+   //添加规则
+   function addRule(rule,value,msg){
+	 //模板
+	   var select = '					  <option selected="selected" >'+rule+'</option>';
+	   var rule_model = '<tr class=\'tr\' >'+
+	   '                   <td scope="row">'+
+	   '			         <select name="rule" class=\'vali_field\' data-type=\'rule\' >'+
+	   '					  <option>required</option>'+
+	   '					  <option>email</option>'+
+	   '					  <option>number</option>'+
+	   '					  <option>digits</option>'+
+	   '					  <option>equalTo</option>'+
+	   '					  <option>extension</option>'+
+	   '					  <option>maxlength</option>'+
+	   '					  <option>minlength</option>'+
+	   '					  <option>rangelength</option>'+
+	   '					  <option>range</option>'+
+	   '					  <option>max</option>'+
+	   '					  <option>min</option>'+
+	   '					  <option>regex</option>'+
+	   '					  <option>remote</option>';
+	   if (rule) {
+		   rule_model += select;
+	   }
+	   rule_model +=
+	   '					</select>'+
+	   '			      </td>'+
+	   '				  <td>'+
+	   '				    <textarea rows="1" cols="1" class=\'input-large field vali_field\' data-type=\'value\' type="text" >'+ value +'</textarea>'+
+	   '				  </td>'+
+	   '				  <td>'+
+	   '				    <textarea rows="1" cols="1" class=\'input-large field vali_field\' data-type=\'msg\'  type="text" >'+ msg +'</textarea>'+
+	   '				  </td>'+
+	   '				  <td>'+
+	   '				    <a class="delete">删除</a>'+
+	   '				  </td>'+
+	   '                </tr>';
+	   $("tbody").append(rule_model);
+   }
+   //添加规则按钮
+   //事件邦定在模板上
+   $("#ruleModal").on("click","#add_rule_btn",function(){
+	   addRule('','','');
+   });
+   //删除规则行
+   $("table").on("click",".delete",function(){
+	   $(this).parentsUntil('tbody').remove();
+	   console.log();
+   });
+   //读入数据更改ui
+   function loadUI(){
+	   var vv = $(".validation-value").val(); 
+	   if (vv) {
+		   console.log(vv);
+		  var vvObject = JSON.parse(vv);
+		  $(vvObject.rule).each(function(){
+			  var rule,value,msg;
+			  $(this).each(function(){
+				  var type = $(this).attr("type"),
+				      val = $(this).attr("value");
+				  if (type == "rule") {
+					rule = val;
+				  }
+				  if (type == "value") {
+					  value = val;
+				  }
+				  if (type == "msg") {
+					  msg = val;
+				  }
+			  });
+			  addRule(rule,value,msg);
+		  });
+	   }
+   }
+   
+   
+   //保存模态数据
+   $("#ruleModal").on("click",".save",function(){
+	   var validationObject = {};
+	   validationObject.name = $(".validation-value").attr('name');
+	   var validationRule = [];
+	   $('table tbody tr').each(function(){
+		   var validationRules = [];
+		    $(this).find('td').each(function(){
+		        //do your stuff, you can use $(this) to get current cell
+		        var k = $(this).find(".vali_field");
+		        var vr = {};
+		        if (k.data("type")) {//排除无效列
+		        	vr.type = k.data("type");
+		        	vr.value = k.val();
+		        	validationRules.push(vr);
+				}
+		    });
+		    validationRule.push(validationRules);
+		});
+	   validationObject.rule = validationRule;
+	   $(".validation-value").val(JSON.stringify(validationObject));//保存
+	   console.log(JSON.stringify(validationObject));
+   });
+  
+   
+</script>

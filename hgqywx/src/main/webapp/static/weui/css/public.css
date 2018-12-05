@@ -1,0 +1,217 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+/*body{
+	background-color: #EFEFF4;
+}*/
+.header{
+	width: 100%;
+	height: 46px;
+	background-color: #4187fa;
+}
+.header p{
+	color: white;
+	font-size: 15px;
+	text-align: center;
+	line-height: 46px;
+}
+.img_left img{
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	top: 10px;
+}
+.img_jilu img{
+	width: 22px;
+	height: 22px;
+	position: absolute;
+	top: 10px;
+	right: 3px;
+}
+.footer{
+	width: 100%;
+	height: 50px;
+	background-color: white;
+	position: absolute;
+	bottom: 0;
+	border-top: 1px solid #DCDCDC;
+}
+.footer_dv{
+	width: 33%;
+	height: 50px;
+	float: left;
+	padding-top: 2px;
+	text-align: center;
+}
+.footer_dv_img{
+	width: 25px;
+	height: 25px;
+}
+.footer_dv_p{
+	font-size: 14px;
+	/*color: #4991f7;*/
+	color: #888b90;
+}
+.footer_dv a{
+	text-decoration: none;
+}
+.tab_color{
+	color: #387ac9;
+}
+#btn_div{
+	padding-top: 35px;
+	display: block;
+	text-align: center;
+}
+#btn{
+	width: 90%;
+	height: 40px;
+	background-color: #4187fa;
+	border: none;
+	color: white;
+	border-radius:5px;
+}
+#btn:focus{
+	outline:none ;
+}
+.weui-top{
+	position: absolute;
+	top: 26px;
+}
+.menu{
+	width: 100%;
+	height: 200px;
+	background-color: white;
+	margin-top: 10px;
+	box-shadow: 0px 1px 2px #E4E4E4;
+}
+.menu1{
+	width: 100%;
+	height: 100px;
+	background-color: white;
+	margin-top: 10px;
+	box-shadow: 0px 1px 5px #E4E4E4;
+}
+.menu_dv{
+	width: 100%;
+	height: 100px;
+}
+.menu_a{
+	width: 25%;
+	padding-top:10px;
+	position: relative;
+	float: left;
+	box-sizing: border-box;
+	text-decoration: none;
+	text-align: center;
+}
+.menu_a img{
+	width: 40px;
+	height: 40px;
+}
+.menu_a p{
+	display: block;
+	color: #000;
+	font-size: 13px;
+}
+.tab_color{
+	color: #4187fa;
+}
+.pr{
+	position: relative;
+}
+.pa{
+	position: absolute;
+	top: -.4em;
+	right:30px;
+}
+.wbr{
+	width:95%;margin: 0 auto;margin-top: 20px;border-radius:8px;
+}
+.f_padding{
+	float: right;padding-right: 30px;padding-top: 5px;
+}
+.zhushi_c{
+	color: #cccccc;font-size: 11px;padding-left: 10px;
+}
+.img_padding{
+	padding-left: 5px;padding-bottom: 8px;
+}
+.tab_color{
+	color: #4187fa;
+}
+.weui-grid:before{
+	border: none;
+}
+.weui-grid:after{
+	border: none;
+}
+    	/*清除浮动*/
+.clear:after{content:"";display:table;clear:both;font-size:1px;line-height:0;height:0;}
+
+/*字体大小*/
+.f12{ font-size: 12px!important; }
+.f13{ font-size: 13px!important; }
+.f14{ font-size: 14px!important; }
+.f15{ font-size: 15px!important; }
+.f16{ font-size: 16px!important; }
+.f17{ font-size: 17px!important; }
+.f18{ font-size: 18px!important; }
+.f20{ font-size: 20px!important; }
+.f24{ font-size: 24px!important; }
+.f26{ font-size: 26px!important; }
+
+/*padding*/
+.p0{ padding:0!important; }
+.p10{ padding:10px!important; }
+.p15{ padding:15px!important; }
+.ptb10{ padding:10px 0!important; }
+.plr10{ padding:0 10px!important; }
+.pl10{ padding-left: 10px!important; }
+.pl20{ padding-left: 20px!important; }
+.pl15{ padding-left: 15px!important; }
+.pr10{ padding-right: 10px!important; }
+.pt10{ padding-top: 10px!important; }
+.pb10{ padding-bottom:10px!important; }
+
+
+/*margin*/
+.m0{ margin:0!important; }
+.m10{ margin:10px!important; }
+.m15{ margin:15px!important; }
+.mtb10{ margin:10px 0!important; }
+.mlr10{ margin:0 10px!important; }
+.ml10{ margin-left: 10px!important; }
+.mr10{ margin-right: 10px!important; }
+.mt5{ margin-top: 5px!important; }
+.mt10{ margin-top: 10px!important; }
+.mb10{ margin-bottom:10px!important; }
+.mb66{ margin-bottom:66px!important; }
+.mt-1{ margin-top: -1px!important; }
+
+/*文字左中右对齐*/
+.tal{ text-align: left!important; }
+.tac{ text-align: center!important; }
+.tar{ text-align: right!important; }
+
+/*移除伪类边框*/
+.b-top:before,.b-top{ border-top: 0!important; }
+.b-btm:after,.b-btm{ border-bottom: 0!important; }
+.b-tb:before{ border-top: 0!important; }
+.b-tb:after{border-bottom: 0!important;}
+
+/*左右浮动*/
+.fl{ float: left; }
+.fr{ float: right; }
+
+/*底部浮动导航*/
+.weui-fixed-btm{ position: fixed; left: 0; bottom:0; width: 100%; border-top:1px solid #D9D9D9; background:#fff; -webkit-box-sizing:border-box;}
+.weui-fixed-btm .weui-flex__item{ text-align: center; }
+.weui-fixed-btm .weui-fixed-btn{ padding:15px 15px; display: block; border-right:1px solid #D9D9D9; }
+
+/*按钮平分*/
+.weui-list-btm{ padding:10px 5px; }
+.weui-list-btm .weui-flex__item{  display: block; margin:0 5px;}
+
+    	

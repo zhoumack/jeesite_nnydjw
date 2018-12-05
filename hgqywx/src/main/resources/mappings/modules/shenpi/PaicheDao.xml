@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.shenpi.dao.PaicheDao">
+    
+	<sql id="paicheColumns">
+		a.id AS "id",
+		a.user_id AS "user.id",
+		a.user_name AS "userName",
+		a.type AS "type",
+		a.pnums AS "pnums",
+		a.driver AS "driver",
+		a.starttime AS "starttime",
+		a.endtime AS "endtime",
+		a.totaltime AS "totaltime",
+		a.startplace AS "startplace",
+		a.direction AS "direction",
+		a.iscommon AS "iscommon",
+		a.event AS "event",
+		a.place_users AS "placeUsers",
+		a.filepath AS "filepath",
+		a.approve AS "approve",
+		a.copy AS "copy",
+		a.status AS "status",
+		a.url AS "url",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.proc_ins_id AS "procInsId",
+		a.islocaluser AS "islocaluser",
+		a.dcrybz AS "dcrybz",
+		u2.name AS "user.name",
+		'公务用车'  as "ActType"
+	</sql>
+	
+	<sql id="paicheJoins">
+		LEFT JOIN sys_user u2 ON u2.id = a.user_id
+	</sql>
+    
+	<select id="get" resultType="Paiche">
+		SELECT 
+			<include refid="paicheColumns"/>
+		FROM t_paiche a
+		<include refid="paicheJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Paiche">
+		SELECT 
+			a.id AS "id",
+		a.user_id AS "user.id",
+		a.user_name AS "userName",
+		a.type AS "type",
+		a.pnums AS "pnums",
+		a.driver AS "driver",
+		a.starttime AS "starttime",
+		a.endtime AS "endtime",
+		a.totaltime AS "totaltime",
+		a.startplace AS "startplace",
+		a.direction AS "direction",
+		a.iscommon AS "iscommon",
+		a.event AS "event",
+		a.place_users AS "placeUsers",
+		a.filepath AS "filepath",
+		a.approve AS "approve",
+		a.copy AS "copy",
+		a.status AS "status",
+		a.url AS "url",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.proc_ins_id AS "procInsId",
+		a.islocaluser AS "islocaluser",
+		a.dcrybz AS "dcrybz",
+		u2.name AS "user.name",
+		'公务用车'  as "ActType"
+		FROM t_paiche a
+		<include refid="paicheJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<choose>
+				<when test="user!=null and user.id!=null  and user.id!=''">
+					and a.user_id = #{user.id}
+				</when>
+			</choose>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Paiche">
+		SELECT 
+			<include refid="paicheColumns"/>
+		FROM t_paiche a
+		<include refid="paicheJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	<select id="findCaoSongList" resultType="Paiche">
+		SELECT 
+			<include refid="paicheColumns"/>
+		FROM t_paiche a
+		<include refid="paicheJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			and a.copy LIKE 
+				<if test="dbName == 'oracle'">'%'||#{copy}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{copy}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{copy},'%')</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	<insert id="insert">
+		INSERT INTO t_paiche(
+			id,
+			user_id,
+			user_name,
+			type,
+			pnums,
+			driver,
+			starttime,
+			endtime,
+			totaltime,
+			startplace,
+			direction,
+			iscommon,
+			event,
+			place_users,
+			filepath,
+			approve,
+			copy,
+			status,
+			url,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			proc_ins_id,
+			islocaluser,
+			dcrybz
+		) VALUES (
+			#{id},
+			#{user.id},
+			#{userName},
+			#{type},
+			#{pnums},
+			#{driver},
+			#{starttime},
+			#{endtime},
+			#{totaltime},
+			#{startplace},
+			#{direction},
+			#{iscommon},
+			#{event},
+			#{placeUsers},
+			#{filepath},
+			#{approve},
+			#{copy},
+			#{status},
+			#{url},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{procInsId},
+			#{islocaluser},
+			#{dcrybz}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_paiche SET 	
+			user_id = #{user.id},
+			user_name = #{userName},
+			type = #{type},
+			pnums = #{pnums},
+			driver = #{driver},
+			starttime = #{starttime},
+			endtime = #{endtime},
+			totaltime = #{totaltime},
+			startplace = #{startplace},
+			direction = #{direction},
+			iscommon = #{iscommon},
+			event = #{event},
+			place_users = #{placeUsers},
+			filepath = #{filepath},
+			approve = #{approve},
+			copy = #{copy},
+			status = #{status},
+			url = #{url},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			proc_ins_id = #{procInsId},
+			islocaluser =#{islocaluser},
+			dcrybz = #{dcrybz}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE t_paiche SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

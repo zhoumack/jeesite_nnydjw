@@ -1,0 +1,98 @@
+.sign_calendar {
+	width: 88%;
+	margin: 0 auto;
+}
+
+.icon-true {
+	display: block;
+	width: 6px;
+	height: 12px;
+	border-bottom: 2px solid #2AC845;
+	border-right: 2px solid #2AC845;
+	position: absolute;
+	bottom: 1px;
+	right: 5px;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.mui-popover {
+	text-align: center;
+	width: 100px;
+}
+
+.main_div{
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 44px;
+	background-image: url(../../images/personCenter/signBG.jpg);
+	background-size: 100%;
+}
+
+.relative{
+	position: relative;
+}
+
+.sign_msg{
+	width: 78%;
+	height: 130px;
+	margin: 20px auto;
+	margin-top: 20px;
+	background-color: #FEF7CD;
+	border-radius: 7px;
+}
+
+.sign_title{
+	width: 188px;
+	height: 50px;
+	position: relative;
+	top:-15px;
+	margin: 0 auto;
+	background-image: url(../../images/personCenter/signTitle.png);
+	background-size: 100%;
+	padding-top: 3px;
+	padding-left: 67px;
+	font-size: 15px;
+	color: white;
+}
+
+.sign_jifen{
+	text-align: center;
+	color: #845D2C;
+	font-size: 16px;
+	position: relative;
+	top:-7px;
+}
+
+.jifen_num{
+	color: #DE4570;
+	font-size: 19px;
+}
+
+.sign_content{
+	padding: 13px 20px 10px 20px;
+	font-size: 15px;
+	position: relative;
+	top:-10px;
+}
+
+.sign_explain{
+	width: 100%;
+	height: 80px;
+	position: fixed;
+	bottom: 0;
+	background-image: url(../../images/personCenter/signBottom.png);
+	padding: 15px;
+}
+
+.sign_text1{
+	color: white;
+	font-size: 17px;
+}
+
+.sign_text2{
+	color: white;
+	font-size: 12px;
+}

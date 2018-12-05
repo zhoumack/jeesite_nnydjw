@@ -1,0 +1,22 @@
+[
+  {
+    "title": "component Text Area",
+    "fields": {
+      "id": {
+        "label": "ID / Name",
+        "type": "input",
+        "value": "componenttextarea"
+      },
+      "componentname": {
+        "label": "组件",
+        "type": "input",
+        "value": "组件"
+      },
+      "val": {
+        "label": "Value",
+        "type": "input",
+        "value": "值"
+      }
+    }
+  }
+]

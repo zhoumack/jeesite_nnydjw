@@ -1,0 +1,21 @@
+<!-- Time selecter-->
+<div class="pub_mod">
+	<div class="pub_row">
+		<div class="pub_input_title"><%- label %></div>
+		<div class="pub_input_con">
+			<!--dataOptions='{"type":"date"}'-->
+			<input 
+			 id="<%- id %>"
+             name="<%- id %>"
+			 class="pub_input pub_sel_time"
+			 type="text" 
+			 placeholder="请选择" 
+			 readonly="readonly"
+			 dataOptions=''
+			 <% if(required) {%> required <% } %> 
+			 data-label=<%- label %>
+             data-validation=<%- validationrule %>
+			 />
+		</div>
+	</div>
+</div>
